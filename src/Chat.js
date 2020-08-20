@@ -16,12 +16,12 @@ function Chat() {
 	const [roomName, setRoomName] = useState("");
 	useEffect(() => {
 		if (roomId) {
-			db.collection('room').doc(roomId).onSnapshot(snapshot => (setRoomName(snapshot.data().name)))
+			db.collection('rooms').doc(roomId).onSnapshot(snapshot => (setRoomName(snapshot.data().name)))
 		}
 	}, [roomId])
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000))
-	}, [])
+	}, [roomId])
 	const sendMessage = (e) => {
 		e.preventDefault();
 		console.log('you typed ',input);
