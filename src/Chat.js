@@ -9,6 +9,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { useParams } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
 import db from "./firebase";
+import firebase from "./firebase"
 
 function Chat() {
 	const [input, setInput] = useState("")
@@ -40,8 +41,8 @@ function Chat() {
 
 		db.collection('rooms').doc(roomId).collection('messages').add({
 			message: input,
-			name: user,
-			
+			name: user.displayName,
+			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		})
 		setInput("");
 	}
